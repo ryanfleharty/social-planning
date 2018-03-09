@@ -1,0 +1,20 @@
+{
+  "name": "daytripper",
+  "version": "1.0.0",
+  "description": "coolproject",
+  "main": "server.js",
+  "dependencies": {
+    "@google/maps": "^0.4.5",
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
