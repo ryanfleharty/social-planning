@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
-const pat = require('path');
+const path = require('path');
 
 mongoose.connect('mongodb://localhost/spt_db');
 

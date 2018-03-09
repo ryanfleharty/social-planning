@@ -8,11 +8,14 @@ var googleMapsClient = require('@google/maps').createClient({
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "./static")));
 
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 require('./server/config/mongoose');
+var routes_setter = require('./server/config/routes.js');
+routes_setter(app);
 
 app.get('/', function(req, res) {
  res.render("index");
@@ -23,6 +26,7 @@ app.get('/locations/:id', function(req, res){
         if(err){
             res.status(404).json(err)
         }
+        console.log(response.json.result.opening_hours.periods);
         res.render("placeDetail", {"place":response.json.result})
     })
 })
