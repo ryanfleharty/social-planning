@@ -12,6 +12,7 @@ app.use(express.static(path.join(__dirname, "./static")));
 
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
+require('./server/config/mongoose');
 
 app.get('/', function(req, res) {
  res.render("index");
@@ -26,7 +27,7 @@ app.get('/locations/:id', function(req, res){
     })
 })
 
-app.post('/location_search', function(req, res){
+app.post('/places_search', function(req, res){
     getLocation(req.body.city, function(response){
         getPlaces(req.body.query, response.lat, response.lng, function(response){
             res.json(response);
