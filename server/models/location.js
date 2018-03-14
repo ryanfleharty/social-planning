@@ -5,7 +5,7 @@ var LocationSchema = new Schema({
     "name" : String,
     "description" : String,
     "google_rating" : Number,
-    "google_place_id" : Number,
+    "google_placeid" : Number,
     "categories" : [{ type: Schema.Types.ObjectId, ref: "Category"}]
 })
 

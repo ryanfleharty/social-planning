@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var PlanSchema = new Schema({
     title: String,
-    date: { type: Date },
+    date: Date,
     creator: { type: Schema.Types.ObjectId, ref: 'User'},
     joiners: [{ type: Schema.Types.ObjectId, ref: 'User'}],
     stops: [{ type: Schema.Types.ObjectId, ref: 'Stop'}]

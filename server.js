@@ -10,16 +10,14 @@ var googleMapsClient = require('@google/maps').createClient({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "./static")));
-
+app.use(express.static(__dirname + '/front/dist'));
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 require('./server/config/mongoose');
 var routes_setter = require('./server/config/routes.js');
 routes_setter(app);
 
-app.get('/', function(req, res) {
- res.render("index");
-})
+
 
 app.get('/locations/:id', function(req, res){
     googleMapsClient.place({"placeid":req.params.id}, function(err, response){
@@ -31,9 +29,10 @@ app.get('/locations/:id', function(req, res){
     })
 })
 
-app.post('/places_search', function(req, res){
-    getLocation(req.body.city, function(response){
-        getPlaces(req.body.query, response.lat, response.lng, function(response){
+app.get('/places_search', function(req, res){
+    console.log(req.query)
+    getLocation(req.query.city, function(response){
+        getPlaces(req.query.query, response.lat, response.lng, function(response){
             res.json(response);
         })
     })
@@ -46,7 +45,7 @@ function getPlaces(query, lat, lng, callback){
     },
     function(err, response){
         if(!err){
-            callback(response.json)
+            callback(response.json.results)
         }
         else{
             console.log(err)
@@ -64,7 +63,7 @@ function getLocation(city, callback){
         }
     )
 }
-
+app.all("**", (request, response) => { response.sendFile(path.resolve("./front/dist/index.html")) });
 app.listen(8000, function() {
  console.log("listening on port 8000");
 });
