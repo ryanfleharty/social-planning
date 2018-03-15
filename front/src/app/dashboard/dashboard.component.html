@@ -1,0 +1,11 @@
+<h1>Whatup</h1>
+<form action="" (submit)="getPlaces(city, query)">
+  <label for="query">Look for </label>
+  <input type="text" [(ngModel)]="query" name="query">
+  <label for="city">in </label>
+  <input type="text" [(ngModel)]="city" name="city">
+  <input type="submit">
+</form>
+<div *ngFor="let place of places">
+  <h2>{{ place.name }}</h2>
+</div>
