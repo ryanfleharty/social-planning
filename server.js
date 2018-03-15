@@ -63,7 +63,11 @@ function getLocation(city, callback){
         }
     )
 }
-app.all("**", (request, response) => { response.sendFile(path.resolve("./front/dist/index.html")) });
+app.all("**", (request, response) => {
+    console.log("PASSING THE BUCK TO ANGULAR")
+    console.log(request.originalUrl)
+    // response.sendFile(path.resolve("./front/dist/index.html")) 
+});
 app.listen(8000, function() {
  console.log("listening on port 8000");
 });
